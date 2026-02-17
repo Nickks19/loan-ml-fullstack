@@ -211,3 +211,14 @@ node_modules/
 .next/
 .env.local
 
+# Node / Next.js
+node_modules/
+.next/
+out/
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
