@@ -89,6 +89,13 @@ def build_pipeline(categorical_features: list[str], numeric_features: list[str])
 def main() -> None:
     df = load_and_clean_data(DATA_PATH)
 
+    print("\n=== Feature Ranges ===")
+    print(df[["income_annum","loan_amount","loan_term","cibil_score"]].describe())
+
+    print("\n=== Class Balance ===")
+    print(df["loan_status"].value_counts(normalize=True))
+
+
     target = "loan_status"
     categorical_features = ["education", "self_employed"]
     numeric_features = [c for c in df.columns if c not in categorical_features + [target]]
@@ -133,3 +140,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
