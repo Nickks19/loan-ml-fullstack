@@ -1,13 +1,12 @@
-from fastapi import APIRouter, HTTPException
-from app.api.schemas import LoanApplication, PredictionResponse
-from app.ml.predict import predict_single
+from fastapi import APIRouter
+from app.api.schemas import LoanApplicationRequest, LoanPredictionResponse
+from app.ml.predict import LoanModel
 
 router = APIRouter()
 
-@router.post("/predict", response_model=PredictionResponse)
-def predict(payload: LoanApplication):
-    try:
-        result = predict_single(payload.model_dump())
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+model = LoanModel()
+
+@router.post("/predict", response_model=LoanPredictionResponse)
+def predict_loan(req: LoanApplicationRequest):
+    result = model.predict(req.model_dump())
+    return result
