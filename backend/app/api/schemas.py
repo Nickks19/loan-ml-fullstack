@@ -8,5 +8,6 @@ class LoanApplicationRequest(BaseModel):
     dti: float = Field(..., ge=0)
 
 class LoanPredictionResponse(BaseModel):
-    approved: bool
-    probability_bad: float
+    result: str                 # "Approved" or "Rejected"
+    probability: float          # confidence in the result
+    probability_bad: float      # risk score (debug / transparency)
